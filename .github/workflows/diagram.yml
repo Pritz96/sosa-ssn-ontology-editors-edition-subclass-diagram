@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository
+      # 1. Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -29,7 +29,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Run script to generate PUML
+      # 4. Run script that generates PUML
       - name: Generate PUML file
         run: |
           python generate_puml.py
@@ -41,17 +41,23 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      # 6. Download PlantUML jar
+      # 6. Install Graphviz
+      - name: Install Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+
+      # 7. Download PlantUML
       - name: Download PlantUML
         run: |
           wget https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar -O plantuml.jar
 
-      # 7. Generate SVG from PUML
+      # 8. Generate SVG from PUML
       - name: Generate SVG
         run: |
           java -jar plantuml.jar -tsvg diagram.puml
 
-      # 8. Commit and push changes if any
+      # 9. Commit and push changes if needed
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
