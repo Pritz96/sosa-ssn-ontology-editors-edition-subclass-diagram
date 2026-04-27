@@ -1,0 +1,68 @@
+name: Generate PlantUML Diagram
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # every day at 00:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Run script to generate PUML
+      - name: Generate PUML file
+        run: |
+          python generate_puml.py
+
+      # 5. Set up Java (required for PlantUML)
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # 6. Download PlantUML jar
+      - name: Download PlantUML
+        run: |
+          wget https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar -O plantuml.jar
+
+      # 7. Generate SVG from PUML
+      - name: Generate SVG
+        run: |
+          java -jar plantuml.jar -tsvg diagram.puml
+
+      # 8. Commit and push changes if any
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add diagram.puml diagram.svg
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Update PlantUML diagram"
+          git push
