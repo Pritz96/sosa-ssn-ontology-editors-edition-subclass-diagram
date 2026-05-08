@@ -1,4 +1,9 @@
-# SOSA Ontology (Editors Edition) Subclass Diagram
+# SOSA/SSN Ontology (Editors Edition) Subclass Diagram
 
-![Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ontology-editors-edition-subclass-diagram/refs/heads/main/diagram.svg
+## SOSA Only
+![SOSA Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ssn-ontology-editors-edition-subclass-diagram/refs/heads/main/sosa_diagram.svg
+)
+
+## SOSA + SSN
+![SOSA SSN Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ssn-ontology-editors-edition-subclass-diagram/refs/heads/main/sosa_ssn_diagram.svg
 )

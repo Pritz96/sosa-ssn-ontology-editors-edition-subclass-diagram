@@ -8,26 +8,34 @@ def get_label(uri):
     except ValueError:
         return str(uri)  # fallback for weird cases
 
-g = Graph()
-# Load SOSA
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa-actuation.ttl", format="turtle")
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa-common.ttl", format="turtle")
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa-deprecated.ttl", format="turtle")
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa-observation.ttl", format="turtle")
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa-sampling.ttl", format="turtle")
-g.parse("https://raw.githubusercontent.com/w3c/sdw-sosa-ssn/refs/heads/gh-pages/ssn/rdf/ontology/core/sosa.ttl", format="turtle")
 
-# Serialise sosa editors edition to ttl
-g.serialize("sosa.ttl", format="turtle")
+def graph_to_puml(g: Graph, filename: str = "diagram.puml"):
+    lines = ["@startuml"]
 
-lines = ["@startuml"]
+    for child, _, parent in g.triples((None, RDFS.subClassOf, None)):
+        child_name = get_label(child)
+        parent_name = get_label(parent)
+        lines.append(f'"{parent_name}" <|-- "{child_name}"')
 
-for child, _, parent in g.triples((None, RDFS.subClassOf, None)):
-    child_name = get_label(child)
-    parent_name = get_label(parent)
-    lines.append(f'"{parent_name}" <|-- "{child_name}"')
+    lines.append("@enduml")
 
-lines.append("@enduml")
-puml= "\n".join(lines)
-with open("diagram.puml", "w", encoding="utf-8") as f:
-    f.write(puml)
+    puml = "\n".join(lines)
+
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(puml)
+
+    return filename
+
+sosa = Graph()
+sosa.parse(
+    "https://raw.githubusercontent.com/Pritz96/ontology-library/refs/heads/main/serialised-ontologies/sosa-editors-edition.ttl",
+    format="turtle"
+)
+graph_to_puml(sosa, "sosa_diagram.puml")
+
+sosa_ssn = Graph()
+sosa_ssn.parse(
+    "https://raw.githubusercontent.com/Pritz96/ontology-library/refs/heads/main/serialised-ontologies/sosa-ssn-editors-edition.ttl",
+    format="turtle"
+)
+graph_to_puml(sosa_ssn, "sosa_ssn_diagram.puml")

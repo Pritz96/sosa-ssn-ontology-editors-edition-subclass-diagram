@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -23,18 +23,18 @@ jobs:
         with:
           python-version: "3.11"
 
-      # 3. Install Python dependencies
+      # 3. Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Run script that generates PUML
-      - name: Generate PUML file
+      # 4. Generate PUML files
+      - name: Generate PUML files
         run: |
           python generate_puml.py
 
-      # 5. Set up Java (required for PlantUML)
+      # 5. Set up Java (PlantUML dependency)
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -52,10 +52,10 @@ jobs:
         run: |
           wget https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar -O plantuml.jar
 
-      # 8. Generate SVG from PUML
-      - name: Generate SVG
+      # 8. Generate SVGs from PUML files
+      - name: Generate SVGs
         run: |
-          java -jar plantuml.jar -tsvg diagram.puml
+          java -jar plantuml.jar -tsvg sosa_diagram.puml sosa_ssn_diagram.puml
 
       # 9. Commit and push changes if needed
       - name: Commit and push changes
@@ -63,12 +63,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add diagram.puml diagram.svg
+          git add sosa_diagram.puml sosa_diagram.svg
+          git add sosa_ssn_diagram.puml sosa_ssn_diagram.svg
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
 
-          git commit -m "Update PlantUML diagram"
+          git commit -m "Update PlantUML diagrams"
           git push
