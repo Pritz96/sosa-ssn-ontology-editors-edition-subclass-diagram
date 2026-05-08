@@ -17,17 +17,17 @@ def graph_to_puml(g: Graph, filename: str = "diagram.puml"):
     for child, _, parent in g.triples((None, RDFS.subClassOf, None)):
         if isinstance(parent, BNode):
             continue  # skip parent blank nodes
-        classes_with_parent_or_child.add(child)
-        classes_with_parent_or_child.add(parent)
         child_name = get_label(child)
         parent_name = get_label(parent)
+        classes_with_parent_or_child.add(child_name)
+        classes_with_parent_or_child.add(parent_name)
         lines.append(f'"{parent_name}" <|-- "{child_name}"')
 
-    # identify classes without a parent/child
+    # identify classes without a parent/child and that aren't a blank node
     classes_without_parent_or_child = set()
-    for cls in g.subjects((None, RDF.type, OWL.Class)):
-        if cls not in classes_with_parent_or_child:
-            classes_without_parent_or_child.add(cls)
+    for cls in g.subjects(RDF.type, OWL.Class):
+        if (get_label(cls) not in classes_with_parent_or_child) and not isinstance(cls,BNode):
+            classes_without_parent_or_child.add(get_label(cls))
     
     for x in classes_without_parent_or_child:
         lines.append(f"class {get_label(x)}")
