@@ -21,7 +21,7 @@ def graph_to_puml(g: Graph, filename: str = "diagram.puml"):
         parent_name = get_label(parent)
         classes_with_parent_or_child.add(child_name)
         classes_with_parent_or_child.add(parent_name)
-        lines.append(f'"{parent_name}" <|-- "{child_name}"')
+        lines.append(f'{parent_name} <|-- {child_name}')
 
     # identify classes without a parent/child and that aren't a blank node
     classes_without_parent_or_child = set()
