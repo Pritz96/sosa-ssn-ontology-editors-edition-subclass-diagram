@@ -1,4 +1,4 @@
-from rdflib import Graph, RDFS
+from rdflib import Graph, RDFS, BNode
 from rdflib.namespace import split_uri
 
 def get_label(uri):
@@ -13,6 +13,8 @@ def graph_to_puml(g: Graph, filename: str = "diagram.puml"):
     lines = ["@startuml"]
 
     for child, _, parent in g.triples((None, RDFS.subClassOf, None)):
+        if isinstance(parent, BNode):
+            continue  # skip parent blank nodes
         child_name = get_label(child)
         parent_name = get_label(parent)
         lines.append(f'"{parent_name}" <|-- "{child_name}"')
