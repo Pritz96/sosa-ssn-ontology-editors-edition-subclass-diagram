@@ -1,5 +1,6 @@
 # SOSA/SSN Ontology (Editors Edition) Subclass Diagram
 
+<<<<<<< HEAD
 These diagrams visualise all `owl:Class` instances that are not blank nodes, as well as `owl:Class` instances that are linked to other `owl:Class` instances via `rdf:subClassOf`.
 
 The following `rdf:subClassOf` relationship is an example of relationship that is not visualised (as sosa:Result is a subclass of something that is not an `owl:Class`):
@@ -19,4 +20,10 @@ sosa:Result a owl:Class ;
 ![SOSA Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ssn-ontology-editors-edition-subclass-diagram/refs/heads/main/sosa_diagram.svg)
 
 ## SOSA/SSN
+=======
+## SOSA Only
+![SOSA Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ssn-ontology-editors-edition-subclass-diagram/refs/heads/main/sosa_diagram.svg)
+
+## SOSA/SSN (ignores class parents that are blank nodes i.e. class restrictions)
+>>>>>>> main
 ![SOSA/SSN Subclass Diagram](https://raw.githubusercontent.com/Pritz96/sosa-ssn-ontology-editors-edition-subclass-diagram/refs/heads/main/sosa_ssn_diagram.svg)
