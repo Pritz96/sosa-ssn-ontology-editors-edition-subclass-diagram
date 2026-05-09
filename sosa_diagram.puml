@@ -1,0 +1,26 @@
+@startuml
+Property <|-- ActuatableProperty
+Sample <|-- MaterialSample
+Property <|-- ObservableProperty
+Sample <|-- SpatialSample
+Sample <|-- StatisticalSample
+Procedure <|-- ActuatingProcedure
+Procedure <|-- ObservingProcedure
+Procedure <|-- SamplingProcedure
+Asset <|-- Platform
+System <|-- Sampler
+System <|-- Actuator
+ExecutionCollection <|-- SamplingCollection
+Asset <|-- System
+System <|-- Sensor
+Execution <|-- Sampling
+Execution <|-- Actuation
+ExecutionCollection <|-- ActuationCollection
+ExecutionCollection <|-- ObservationCollection
+Execution <|-- Observation
+class Result
+class SampleCollection
+class Stimulus
+class Deployment
+class FeatureOfInterest
+@enduml
