@@ -9,10 +9,7 @@ sosa:Result a owl:Class ;
     rdfs:isDefinedBy sosa-common: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty sosa:isResultOf ;
-            owl:someValuesFrom sosa:Execution ] ;
-    owl:deprecated true ;
-    skos:definition """
-  outcome of an Observation, Actuation, or act of Sampling. 
+            owl:someValuesFrom sosa:Execution ] .
 ```
 
 ## SOSA
