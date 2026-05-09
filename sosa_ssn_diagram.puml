@@ -18,11 +18,11 @@ Execution <|-- Observation
 ExecutionCollection <|-- SamplingCollection
 ExecutionCollection <|-- ActuationCollection
 ExecutionCollection <|-- ObservationCollection
-class Stimulus
 class Result
-class Input
 class SampleCollection
 class FeatureOfInterest
-class Output
+class Input
 class Deployment
+class Stimulus
+class Output
 @enduml
