@@ -18,9 +18,9 @@ Execution <|-- Actuation
 ExecutionCollection <|-- ActuationCollection
 ExecutionCollection <|-- ObservationCollection
 Execution <|-- Observation
-class Result
 class SampleCollection
+class Result
+class FeatureOfInterest
 class Deployment
 class Stimulus
-class FeatureOfInterest
 @enduml
