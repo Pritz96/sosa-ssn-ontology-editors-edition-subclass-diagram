@@ -19,14 +19,14 @@ ExecutionCollection <|-- ActuationCollection
 ExecutionCollection <|-- ObservationCollection
 Execution <|-- Observation
 class Deployment
+class FeatureOfInterest
+class System
+class Input
+class Stimulus
 class Output
+class Stimulus
 class SampleCollection
 class Result
-class System
-class FeatureOfInterest
 class Property
-class Stimulus
-class Stimulus
 class Deployment
-class Input
 @enduml
