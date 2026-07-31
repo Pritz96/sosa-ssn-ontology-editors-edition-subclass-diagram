@@ -20,7 +20,7 @@ ExecutionCollection <|-- ObservationCollection
 Execution <|-- Observation
 class SampleCollection
 class FeatureOfInterest
-class Stimulus
 class Deployment
+class Stimulus
 class Result
 @enduml
