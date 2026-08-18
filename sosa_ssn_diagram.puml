@@ -18,15 +18,15 @@ System <|-- Sensor
 ExecutionCollection <|-- ActuationCollection
 ExecutionCollection <|-- ObservationCollection
 Execution <|-- Observation
-class Property
-class SampleCollection
-class System
-class Input
+class Stimulus
 class Deployment
-class Stimulus
-class Result
 class Output
-class Stimulus
 class FeatureOfInterest
 class Deployment
+class SampleCollection
+class Input
+class System
+class Stimulus
+class Result
+class Property
 @enduml
