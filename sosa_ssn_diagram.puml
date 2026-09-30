@@ -20,13 +20,13 @@ ExecutionCollection <|-- ObservationCollection
 Execution <|-- Observation
 class Stimulus
 class Deployment
-class Deployment
-class Input
-class Result
-class Output
-class SampleCollection
+class System
 class FeatureOfInterest
+class SampleCollection
+class Input
+class Output
+class Deployment
 class Property
 class Stimulus
-class System
+class Result
 @enduml
